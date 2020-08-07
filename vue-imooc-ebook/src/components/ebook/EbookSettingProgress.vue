@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="text-wrapper">
-          <span class="progress-section-text">123</span>
+          <span class="progress-section-text">{{getSectionName}}</span>
           <span>({{bookAvailable ? progress + '%' : '加载中...'}})</span>
         </div>
       </div>
@@ -34,10 +34,19 @@
 
 <script>
   import { ebookMixin } from '../../utils/mixin'
-  import { getReadTime } from '../../utils/localStorage'
 
   export default {
     mixins: [ebookMixin],
+    // computed: {
+    //   getSectionName() {
+    //     if(this.section) {
+    //       const sectionInfo = this.currentBook.section(this.section)
+    //       if(sectionInfo && sectionInfo.href && this.currentBook &&this.currentBook.navigation){
+    //         return this.currentBook.navigation.get(sectionInfo.href).label
+    //       }
+    //     }
+    //   }
+    // },
     methods: {
       onProgressChange(progress) {
         this.setProgress(progress).then(() => {
@@ -78,17 +87,6 @@
           this.display(sectionInfo.href)
         }
       },
-      getReadTimeText() {
-        return this.$t('book.haveRead').replace('$1',this.getReadTimeByMinute())
-      },
-      getReadTimeByMinute() {
-        const readTime = getReadTime(this.fileName)
-        if(!readTime){
-          return 0
-        } else {
-          return Math.ceil(readTime / 60)
-        }
-      }
     },
     updated() {
       this.updateProgressBg()

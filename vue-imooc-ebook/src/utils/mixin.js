@@ -1,6 +1,6 @@
 //实现代码复用
 import { mapGetters, mapActions } from 'vuex'
-import { themeList, addCss, removeAllCss } from './book'
+import { themeList, addCss, removeAllCss,  getReadTimeByMinute} from './book'
 import { saveLocation, getLocation } from './localStorage'
 
 export const ebookMixin = {
@@ -31,9 +31,9 @@ export const ebookMixin = {
         themeList() {
           return themeList(this)
         },
-        // getSectionName() {
-        //   return this.section ? this.navigation[this.section].label : ''
-        // }
+        getSectionName() {
+          return this.section ? this.navigation[this.section].label : ''
+        }
     },
     methods: {
         ...mapActions([
@@ -102,6 +102,15 @@ export const ebookMixin = {
               })
             }
           },
+          hideTitleAndMenu() {
+            // this.$store.dispatch('setMenuVisible', false)
+            this.setMenuVisible(false)
+            this.setSettingVisible(-1)
+            this.setFontFamilyVisible(false)
+        },
+        getReadTimeText() {
+          return this.$t('book.haveRead').replace('$1', getReadTimeByMinute(this.fileName))
+        },
     }
      
 }
