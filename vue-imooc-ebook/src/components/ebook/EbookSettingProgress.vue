@@ -6,6 +6,7 @@
           <span class="read-time-text">{{getReadTimeText()}}</span>
           <span class="icon-forward"></span>
         </div>
+
         <div class="progress-wrapper">
           <div class="progress-icon-wrapper" @click="prevSection()">
             <span class="icon-back"></span>
@@ -23,6 +24,7 @@
             <span class="icon-forward"></span>
           </div>
         </div>
+
         <div class="text-wrapper">
           <span class="progress-section-text">{{getSectionName}}</span>
           <span>({{bookAvailable ? progress + '%' : '加载中...'}})</span>
@@ -48,16 +50,18 @@
     //   }
     // },
     methods: {
+      //点击进度条
       onProgressChange(progress) {
         this.setProgress(progress).then(() => {
           this.displayProgress()
           this.updateProgressBg()
         })
       },
+      //拖动进度条
       onProgressInput(progress) {
         this.setProgress(progress).then(() => {
           this.displayProgress()
-          // this.updateProgressBg()
+          this.updateProgressBg()
         })
       },
       displayProgress() {

@@ -1,5 +1,7 @@
 //将book中的静态资源放到这里统一管理，作为公用方法和属性
 import { getReadTime } from './localStorage'
+import { realPx } from './utils'
+
 export const FONT_SIZE_LIST = [
     {fontSize: 12},
     {fontSize: 14},
@@ -27,15 +29,9 @@ export function themeList(vue) {
         body: {
           'color': '#4c5059',
           'background': '#cecece',
-          // 'padding-top': `${realPx(48)}px!important`,
-          // 'padding-bottom': `${realPx(48)}px!important`
-        },
-        // img: {
-        //   'width': '100%'
-        // },
-        // '.epubjs-hl': {
-        //   'fill': 'red', 'fill-opacity': '0.3','mix-blend-mode': 'multiply'
-        // }
+          'padding-top': `${realPx(48)}px!important`,
+          'padding-bottom': `${realPx(48)}px!important`
+        }
       }
     },
     {
@@ -45,15 +41,9 @@ export function themeList(vue) {
         body: {
           'color': '#5c5b56',
           'background': '#c6c2b6',
-          // 'padding-top': `${realPx(48)}px!important`,
-          // 'padding-bottom': `${realPx(48)}px!important`
-        },
-        // img: {
-        //   'width': '100%'
-        // },
-        // '.epubjs-hl': {
-        //   'fill': 'red', 'fill-opacity': '0.3','mix-blend-mode': 'multiply'
-        // }
+          'padding-top': `${realPx(48)}px!important`,
+          'padding-bottom': `${realPx(48)}px!important`
+        }
       }
     },
     {
@@ -63,15 +53,9 @@ export function themeList(vue) {
         body: {
           'color': '#404c42',
           'background': '#a9c1a9',
-          // 'padding-top': `${realPx(48)}px!important`,
-          // 'padding-bottom': `${realPx(48)}px!important`
-        },
-        // img: {
-        //   'width': '100%'
-        // },
-        // '.epubjs-hl': {
-        //   'fill': 'red', 'fill-opacity': '0.3','mix-blend-mode': 'multiply'
-        // }
+          'padding-top': `${realPx(48)}px!important`,
+          'padding-bottom': `${realPx(48)}px!important`
+        }
       }
     },
     {
@@ -81,20 +65,13 @@ export function themeList(vue) {
         body: {
           'color': '#cecece',
           'background': '#000000',
-          // 'padding-top': `${realPx(48)}px!important`,
-          // 'padding-bottom': `${realPx(48)}px!important`
-        },
-        // img: {
-        //   'width': '100%'
-        // },
-        // '.epubjs-hl': {
-        //   'fill': 'red', 'fill-opacity': '0.3','mix-blend-mode': 'multiply'
-        // }
+          'padding-top': `${realPx(48)}px!important`,
+          'padding-bottom': `${realPx(48)}px!important`
+        }
       }
     }
   ]
 }
-
 export function addCss(href) {
   const link = document.createElement('link')
   link.setAttribute('rel', 'stylesheet')

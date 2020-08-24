@@ -48,7 +48,7 @@ export default {
     },
     methods: {
         showSetting(key) { 
-            this.setSettingVisible(key);
+          this.setSettingVisible(key);
         }
     }
 }
@@ -60,7 +60,7 @@ export default {
       position: absolute;
       bottom: 0;
       left: 0;
-      z-index: 102;
+      z-index: 200;
       display: flex;
       width: 100%;
       height: px2rem(48);

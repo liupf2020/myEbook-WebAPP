@@ -41,7 +41,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 101;
+    z-index: 210;
     display: flex;
     width: 100%;
     height: px2rem(48); //这里高度自己调整
@@ -49,7 +49,7 @@ export default {
     box-shadow: 0 px2rem(8) px2rem(8) rgba(0, 0, 0, .15);
     font-size: px2rem(20);
     .left {
-      flex: 0 0 px2rem(60); //？？?
+      flex: 0 0 px2rem(60); 
       @include left;
       margin-left: px2rem(15);
     }

@@ -19,7 +19,7 @@
            {{$t('book.cancel')}}
       </div>
     </div>
-    <div class="slide-contents-book-wrapper" v-show="!searchVisible">
+    <div class="slide-contents-book-wrapper"  v-show="!searchVisible">
       <div class="slide-contents-book-img-wrapper">
         <img :src="cover" class="slide-contents-book-img"> 
       </div>
@@ -51,6 +51,7 @@
           @click="displayContent(item.href)">{{item.label}}
         </span>
         <span class="slide-contents-item-page">{{item.page}}</span>
+        
       </div>
     </scroll>
     <scroll class="slide-search-list"
@@ -96,6 +97,7 @@ export default {
         if (this.searchText && this.searchText.length > 0) {
           this.doSearch(this.searchText).then(list => {
             this.searchList = list
+            // console.log(this.searchList)
             this.searchList.map(item => {
               item.excerpt = item.excerpt.replace(this.searchText, `<span class="content-search-text">${this.searchText}</span>`)
               return item
@@ -116,24 +118,23 @@ export default {
         marginLeft: `${px2rem(item.level * 15)}rem`
       }
     },
-    displayContent(target) {
+    displayContent(target, highlight) {
         this.display(target, () => {
           this.hideTitleAndMenu()
-          // if (highlight) {
-          //   this.currentBook.rendition.annotations.highlight(target)
-          // }
+          if (highlight) {
+            this.currentBook.rendition.annotations.highlight(target)
+          }
         })
       },
   },
-  mounted() {
-    console.log(this.currentBook)
-    this.currentBook.ready.then(() => {
-      console.log('ddd')
-      this.doSearch('ddd').then(results => {
-        console.log(results)
-      })
-    })
-  }
+  // mounted() {
+  //   console.log(this.currentBook)
+  //   this.currentBook.ready.then(() => {
+  //     this.doSearch('ddd').then(results => {
+  //       console.log(results)
+  //     })
+  //   })
+  // }
 }
 </script>
 
@@ -194,7 +195,7 @@ export default {
         padding: 0 px2rem(10);
         box-sizing: border-box;
         .slide-contents-book-title {
-          width: px2rem(153.75);
+          // width: px2rem(153.75);
           font-size: px2rem(14);
           line-height: px2rem(16);
           @include left;
@@ -203,7 +204,7 @@ export default {
           }
         }
         .slide-contents-book-author {
-          width: px2rem(153.75);
+          // width: px2rem(153.75);
           font-size: px2rem(12);
           line-height: px2rem(14);
           margin-top: px2rem(5);

@@ -1,32 +1,32 @@
 //实现代码复用
 import { mapGetters, mapActions } from 'vuex'
 import { themeList, addCss, removeAllCss,  getReadTimeByMinute} from './book'
-import { saveLocation, getLocation } from './localStorage'
+import { getBookmark, saveLocation, getLocation } from './localStorage'
 
 export const ebookMixin = {
     //把用到的计算属性都集成到一起了
     computed: {
         ...mapGetters([
-            'fileName',
-            'menuVisible',
-            'settingVisible',
-            'defaultFontSize',
-            'defaultFontFamily',
-            'fontFamilyVisible',
-            'defaultTheme',
-            'bookAvailable',
-            'progress',
-            'section',
-            'isPaginating',
-            'currentBook',
-            'navigation',
-            'cover',
-            'metadata',
-            'paginate',
-            'pagelist',
-            'offsetY',
-            'isBookmark',
-            'speakingIconBottom'
+          'fileName',
+          'menuVisible',
+          'settingVisible',
+          'defaultFontSize',
+          'defaultFontFamily',
+          'fontFamilyVisible',
+          'defaultTheme',
+          'bookAvailable',
+          'progress',
+          'section',
+          'isPaginating',
+          'currentBook',
+          'navigation',
+          'cover',
+          'metadata',
+          'paginate',
+          'pagelist',
+          'offsetY',
+          'isBookmark',
+          'speakingIconBottom'
         ]),
         themeList() {
           return themeList(this)
@@ -77,15 +77,26 @@ export const ebookMixin = {
                 addCss(`${process.env.VUE_APP_RES_URL}/theme/theme_default.css`)  
             } 
           },
-          //更新进度百分比
+          //更新进度百分比和章节
           refreshLocation() {
             const currentLocation = this.currentBook.rendition.currentLocation()
             if (currentLocation && currentLocation.start) {
-                const startCfi = currentLocation.start.cfi
-                const progress = this.currentBook.locations.percentageFromCfi(startCfi)
-                this.setProgress(Math.floor(progress * 100))
-                this.setSection(currentLocation.start.index)
-                saveLocation(this.fileName, startCfi)
+              const startCfi = currentLocation.start.cfi
+              const progress = this.currentBook.locations.percentageFromCfi(startCfi)
+              this.setProgress(Math.floor(progress * 100))
+              this.setSection(currentLocation.start.index)
+              saveLocation(this.fileName, startCfi)
+              
+              const bookmark = getBookmark(this.fileName)
+              if (bookmark) {
+                if (bookmark.some(item => item.cfi === startCfi)) {
+                  this.setIsBookmark(true)
+                } else {
+                  this.setIsBookmark(false)
+                }
+              } else {
+                this.setIsBookmark(false)
+              }
             }
           },
           //简化代码，传入location定位，直接渲染到那。渲染完成后回调，初始化字体字号等
